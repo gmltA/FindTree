@@ -12,7 +12,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    transition: transform .2s ease;
+    transition: transform .2s ease-out;
 }
 
 tree-item {

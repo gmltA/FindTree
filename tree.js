@@ -78,23 +78,6 @@ $(window).on('resize', function(){
     treeController.redraw()
 });
 
-function expandItem(content) {
-    /*var offset = content.offset()
-    var width = content.width();
-    var height = content.height();
-    content.appendTo("body").css({ "width": width, "height": height, "position": "fixed", "top": offset.top, "left": offset.left, "transition": "none", "z-index": "9999" }).addClass("expanded");
-    content.animate({
-        "width": "500px",
-        "height": "300px",
-        "top": $("body").height() / 2 - 150,
-        "left": $("body").width() / 2 - 250
-    }, 500, "easeOutCubic");*/
-}
-
-function collapseItem(content) {
-    
-}
-
 $(function() {
     treeController.connectNodes($("#tree-item-0"), $("#tree-item-1"))
     treeController.connectNodes($("#tree-item-0"), $("#tree-item-2"))
@@ -112,15 +95,12 @@ $(function() {
     treeController.connectNodes($("#tree-item-7"), $("#tree-item-9"))
     $("tree-item").click(function() {
         $(this)[0].expand()
-    })
-    /*$(".tree-item").click(function() {
         $(".blackout").fadeIn();
-        $(".tree-container, body").addClass("zoomed");
-        expandItem($(this))
         treeController.removeLines()
         setTimeout(function() {
             treeController.redraw()
         }, 500)
+        $(".tree-container, body").addClass("zoomed");
         $(".tree-container").removeClass("branch-0").removeClass("branch-1").addClass("branch-"+$(this).data("branch"));
-    })*/
+    })
 });
