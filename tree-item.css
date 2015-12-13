@@ -76,7 +76,3 @@ article {
 .button:hover {
     background-color: rgba(0,0,0,0.1);
 }
-
-.tree-container {
-    transition: transform .8s ease, -webkit-filter .8s ease;
-}
