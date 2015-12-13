@@ -9,7 +9,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque consequat nisi, at tempus nulla suscipit ut. Etiam eu justo in purus cursus condimentum et sed dolor. Nullam et magna in nunc vulputate sagittis. Curabitur ultricies mauris sit amet posuere gravida. Mauris vitae erat varius, accumsan nisl a, aliquet massa. Proin ut tempus nisl. Integer gravida diam quis dictum fringilla. Maecenas dictum vehicula tortor. Nullam vehicula porttitor lorem in tempor. Proin varius ligula vitae massa maximus gravida. Aenean porta posuere sapien, vel placerat tellus elementum at. Vestibulum eget dolor at turpis feugiat hendrerit sodales eu tortor. Vestibulum pellentesque lectus non egestas interdum. Cras pulvinar urna sem, a egestas elit imperdiet at. Mauris ac sollicitudin lectus. Fusce maximus ultricies aliquam.
                 </article>
                 <div class="footer">
-                    <div class="button">Close</div>
+                    <div class="button close">Close</div>
                 </div>
             </div>
         <content></content>
@@ -22,14 +22,19 @@
             ready: function() {
             },
             attached: function() {
+                $(this).click(function() {$(this)[0].expand()});
+                var self = $(this);
+                $(this).find(".footer .close").click(function(){$(self)[0].collapse()})
             },
             detached: function() {
             },
             expand: function() {
                 var content = $(this).children(".tree-item");
+                $(content).attr("id", "expanded-"+$(this).attr("id"));
                 var offset = content.offset()
                 var width = content.width();
                 var height = content.height();
+                this.fire('expanded');
                 content.appendTo("body").css({ "width": width, "height": height, "position": "fixed", "top": offset.top, "left": offset.left, "transition": "none", "z-index": "9999" }).addClass("expanded");
                 content.animate({
                     "width": "500px",
@@ -37,6 +42,24 @@
                     "top": $("body").height() / 2 - 150,
                     "left": $("body").width() / 2 - 250
                 }, 500, "easeOutCubic");
+            },
+            collapse: function() {
+                var content = $("#expanded-"+$(this).attr("id"));
+                var offset = $(this).offset()
+                var width = $(this).width();
+                var height = $(this).height();
+                var self = this;
+                var container = $(this);
+                treeController.removeLines()
+                content.animate({
+                    "width": width,
+                    "height": height,
+                    "top": offset.top,
+                    "left": offset.left
+                }, 500, "easeInCubic", function() {
+                    content.appendTo(container).attr("style", "").removeClass("expanded")
+                    self.fire('collapsed');
+                })
             }
         });
         </script>

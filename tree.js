@@ -93,14 +93,24 @@ $(function() {
     
     treeController.connectNodes($("#tree-item-8"), $("#tree-item-9"))
     treeController.connectNodes($("#tree-item-7"), $("#tree-item-9"))
+    $("tree-item").on({
+        collapsed: function() {
+            $(".tree-container, body").removeClass("zoomed");
+            $(".blackout").fadeOut();
+                setTimeout(function() {
+                    treeController.redraw()
+                }, 800)
+        },
+        expanded: function() {
+            $(".blackout").fadeIn();
+            treeController.removeLines()
+            setTimeout(function() {
+                treeController.redraw()
+            }, 500)
+            $(".tree-container, body").addClass("zoomed");
+        }
+    });
     $("tree-item").click(function() {
-        $(this)[0].expand()
-        $(".blackout").fadeIn();
-        treeController.removeLines()
-        setTimeout(function() {
-            treeController.redraw()
-        }, 500)
-        $(".tree-container, body").addClass("zoomed");
         $(".tree-container").removeClass("branch-0").removeClass("branch-1").addClass("branch-"+$(this).data("branch"));
     })
 });
