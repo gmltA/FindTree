@@ -37,10 +37,10 @@
                 this.fire('expanded');
                 content.appendTo("body").css({ "width": width, "height": height, "position": "fixed", "top": offset.top, "left": offset.left, "transition": "none", "z-index": "9999" }).addClass("expanded");
                 content.animate({
-                    "width": "500px",
-                    "height": "300px",
-                    "top": $("body").height() / 2 - 150,
-                    "left": $("body").width() / 2 - 250
+                    "width": $("body").width(),
+                    "height": $("body").height() / 2,
+                    "top": 0,
+                    "left": 0
                 }, 500, "easeOutCubic");
             },
             collapse: function() {
