@@ -3,9 +3,14 @@ body {
     font-size: 14px;
     color: #757575 !important;
     margin: 0;
-    overflow-x: hidden;
     text-decoration: none;
     background-color: #fafafa;
+}
+
+.body-wrapper {
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
 }
 
 .tree-level-items {

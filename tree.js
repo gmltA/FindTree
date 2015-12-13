@@ -99,18 +99,18 @@ $(function() {
             $(".blackout").fadeOut();
                 setTimeout(function() {
                     treeController.redraw()
-                }, 800)
+                }, 1000)
         },
         expanded: function() {
             $(".blackout").fadeIn();
             treeController.removeLines()
             setTimeout(function() {
                 treeController.redraw()
-            }, 500)
+            }, 1000)
             $(".tree-container, body").addClass("zoomed");
         }
     });
     $("tree-item").click(function() {
-        $(".tree-container").removeClass("branch-0").removeClass("branch-1").addClass("branch-"+$(this).data("branch"));
+        //$(".tree-container").removeClass("branch-0").removeClass("branch-1").addClass("branch-"+$(this).data("branch"));
     })
 });
