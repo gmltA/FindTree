@@ -58,8 +58,8 @@ function Tree() {
 
 Tree.prototype.updateState = function(state) {
     var nodes = Array.from(document.querySelectorAll("tree-item"));
-    nodes.forEach(function(element) {
-        element.completed = true
+    nodes.forEach(function(element, index) {
+        element.completed = state[index] ? state[index].completed : false
     })
 }
 
@@ -80,13 +80,19 @@ Tree.prototype.removeLines = function() {
 }
 
 var treeController = new Tree();
+var treeStatus = [
+    {position: 0, completed: true},
+    {position: 1, completed: true},
+    {position: 2, completed: false},
+    {position: 3, completed: true}
+]
 
-$(window).on('resize', function(){
+window.addEventListener('resize', function(){
     treeController.redraw()
 });
 
 window.addEventListener('WebComponentsReady', function(e) {
-     treeController.updateState()
+    treeController.updateState(treeStatus)
 });
 
 $(function() {
@@ -112,6 +118,7 @@ $(function() {
                     treeController.redraw()
                 }, 1000)
         },
+        
         expanded: function() {
             $(".blackout").fadeIn();
             treeController.removeLines()
@@ -121,7 +128,4 @@ $(function() {
             $(".tree-container, body").addClass("zoomed");
         }
     });
-    $("tree-item").click(function() {
-        //$(".tree-container").removeClass("branch-0").removeClass("branch-1").addClass("branch-"+$(this).data("branch"));
-    })
 });

@@ -14,6 +14,7 @@
 
 .tree-item-content.expanded {
     background-color: #fafafa;
+    box-shadow: 0 10px 50px;
 }
 
 .tree-item-content .header {
@@ -39,7 +40,7 @@
 }
 
 .expanded .footer {
-    display:block;
+    display: flex;
 }
 
 article {
@@ -56,20 +57,38 @@ article {
 
 .button {
     cursor: pointer;
+    padding: 16px;
+    display: inline-block;
+    border-bottom: 2px solid;
+    transition: background-color .2s ease;
+    
+    font-weight: 600;
+    line-height: 26px;
+    text-align: center;
+    height: 26px;
+    color: rgba(0,0,0,0.4);
+}
+
+.button.submit {
+    background-color: rgba(0,0,0,0.03);
+    border-bottom: 2px solid rgba(119, 204, 175, 0.72);
+}
+
+.button:hover, input:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+input {
     padding: 4px 8px 4px 8px;
     display: inline-block;
     background-color: rgba(0,0,0,0.03);
-    border-bottom: 2px solid;
+    border: none;
+    border-bottom: 2px solid rgba(119, 204, 175, 0.72);
     transition: background-color .2s ease;
     
     font-weight: 600;
     color: rgba(0,0,0,0.4);
 }
-
-.button:hover {
-    background-color: rgba(0,0,0,0.1);
-}
-
 
 .done {
     border-radius: 50px;
@@ -84,3 +103,6 @@ article {
     font-size: 0;
 }
 
+.expanded .footer .answer {
+    flex: 1;
+}
