@@ -56,6 +56,13 @@ function Tree() {
     this.lines = []
 }
 
+Tree.prototype.updateState = function(state) {
+    var nodes = Array.from(document.querySelectorAll("tree-item"));
+    nodes.forEach(function(element) {
+        element.completed = true
+    })
+}
+
 Tree.prototype.connectNodes = function(first, second) {
     this.lines.push(new Line(first, second))
 }
@@ -76,6 +83,10 @@ var treeController = new Tree();
 
 $(window).on('resize', function(){
     treeController.redraw()
+});
+
+window.addEventListener('WebComponentsReady', function(e) {
+     treeController.updateState()
 });
 
 $(function() {
