@@ -63,7 +63,7 @@
                 var content = $("#expanded-"+$(this).attr("id"));
                 var answerText = content.find(".answer").val();
                 var self = this;
-                $.post("/ajax/viewTask.php", { answer: answerText}).done(function() {
+                $.post("/ajax/answer.php", { answer: answerText}).done(function() {
                     location.reload();
                 });
             },
