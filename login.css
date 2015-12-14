@@ -106,7 +106,7 @@ body {
     border-width: 0px 0 32px 20px;
     border-color: transparent transparent rgba(119, 204, 175, 0.72) transparent;
     line-height: 0px;
-    transition: border-color .3s ease-in;
+    transition: border-color .3s ease;
 }
 
 .button.loading {
