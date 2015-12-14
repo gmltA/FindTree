@@ -59,7 +59,7 @@ function Tree() {
 Tree.prototype.updateState = function(state) {
     var nodes = Array.from(document.querySelectorAll("tree-item"));
     nodes.forEach(function(element, index) {
-        element.completed = state[index] ? state[index].completed : false
+        element.completed = state.tree[index] ? state.tree[index].isSolved : false
     })
 }
 
@@ -80,19 +80,16 @@ Tree.prototype.removeLines = function() {
 }
 
 var treeController = new Tree();
-var treeStatus = [
-    {position: 0, completed: true},
-    {position: 1, completed: true},
-    {position: 2, completed: false},
-    {position: 3, completed: true}
-]
 
 window.addEventListener('resize', function(){
     treeController.redraw()
 });
 
 window.addEventListener('WebComponentsReady', function(e) {
-    treeController.updateState(treeStatus)
+    $.get("/ajax/getStatus.php", "", function(response){
+        var treeState = JSON.parse(response);
+        treeController.updateState(treeState);
+    });
 });
 
 $(function() {
