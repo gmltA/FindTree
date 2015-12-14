@@ -59,7 +59,18 @@ function Tree() {
 Tree.prototype.updateState = function(state) {
     var nodes = Array.from(document.querySelectorAll("tree-item"));
     nodes.forEach(function(element, index) {
-        element.completed = state.tree[index] ? (state.tree[index].isSolved == 1) : false
+        if (state.tree[index]) {
+            element.completed = state.tree[index].isSolved == 1
+            if (state.current == null) {
+                element.disabled = false;
+                if (state.tree[index].isSolved != 1) {
+                    element.highlighted = true
+                }
+            }
+            else if (state.current == state.tree[index].Id) {
+                element.disabled = false;
+            }
+        }
     })
 }
 
@@ -85,12 +96,15 @@ window.addEventListener('resize', function(){
     treeController.redraw()
 });
 
-window.addEventListener('WebComponentsReady', function(e) {
+function fetchTreeStatus() {
     $.get("/ajax/getStatus.php", "", function(response){
         var treeState = JSON.parse(response);
-        console.log(treeState)
         treeController.updateState(treeState);
     });
+}
+
+window.addEventListener('WebComponentsReady', function(e) {
+    fetchTreeStatus()
 });
 
 $(function() {
@@ -123,6 +137,7 @@ $(function() {
             setTimeout(function() {
                 treeController.redraw()
             }, 1000)
+            fetchTreeStatus()
             $(".tree-container, body").addClass("zoomed");
         }
     });
