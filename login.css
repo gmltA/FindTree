@@ -62,12 +62,12 @@ body {
 
 .form {
     height: 32px;
-    width: 500px;
+    width: 70%;
+    max-width: 500px;
     align-self: center;
     display: flex;
     border-radius: 5px;
     overflow: hidden;
-    margin-bottom: 200px;
 }
 
 .button {

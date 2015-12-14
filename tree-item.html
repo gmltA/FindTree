@@ -40,6 +40,7 @@
                 $(this).click(function() {$(this)[0].expand()});
                 var self = $(this);
                 $(this).find(".footer .close").click(function(){$(self)[0].collapse()})
+                $(this).find(".footer .submit").click(function(){$(self)[0].submitAnswer()})
             },
             
             
@@ -58,9 +59,23 @@
                 this.toggleClass('done', newValue);
             },
             
+            submitAnswer: function() {
+                var content = $("#expanded-"+$(this).attr("id"));
+                var answerText = content.find(".answer").val();
+                var self = this;
+                $.post("/ajax/viewTask.php", { answer: answerText}).done(function() {
+                    location.reload();
+                });
+            },
+            
             expand: function() {
                 if (this.completed || this.disabled)
                     return
+                
+                var article = $(this).find("article");
+                $.post("/ajax/viewTask.php", { position: this.treeNode}).done(function( data ) {
+                    article.html(JSON.parse(data).text)
+                });
                     
                 var content = $(this).children(".tree-item");
                 $(content).attr("id", "expanded-"+$(this).attr("id"));

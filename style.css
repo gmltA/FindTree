@@ -31,14 +31,21 @@ tree-item {
     border-radius: 0 0 2px 2px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.3);
     overflow: hidden;
-    cursor: pointer;
     transition: box-shadow .2s ease,
                 background-color .2s ease;
 }
 
-tree-item:hover {
+tree-item:not(.disabled) {
+    cursor: pointer;
+}
+
+tree-item:not(.disabled):hover {
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
     background-color: rgba(255,255,255,0.3);
+}
+
+tree-item.disabled {
+    opacity: 0.3;
 }
 
 .tree-level:not(:first-child) {

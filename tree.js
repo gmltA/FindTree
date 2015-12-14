@@ -59,7 +59,7 @@ function Tree() {
 Tree.prototype.updateState = function(state) {
     var nodes = Array.from(document.querySelectorAll("tree-item"));
     nodes.forEach(function(element, index) {
-        element.completed = state.tree[index] ? state.tree[index].isSolved : false
+        element.completed = state.tree[index] ? (state.tree[index].isSolved == 1) : false
     })
 }
 
@@ -88,6 +88,7 @@ window.addEventListener('resize', function(){
 window.addEventListener('WebComponentsReady', function(e) {
     $.get("/ajax/getStatus.php", "", function(response){
         var treeState = JSON.parse(response);
+        console.log(treeState)
         treeController.updateState(treeState);
     });
 });

@@ -1,3 +1,11 @@
+function processLoading() {
+    $(".inp").attr("disabled", true)
+    $(".button, .body-wrapper").addClass("loading");
+    setTimeout(function() {
+        $("form").submit();
+    }, 1000)
+}
+
 $(function() {
     $(".inp").on({
         focus: function () {
@@ -9,10 +17,13 @@ $(function() {
     })
     
     $(".button").on("click", function() {
-        $(".inp").attr("disabled", true)
-        $(".button, .body-wrapper").addClass("loading");
-        setTimeout(function() {
-            $(".form").submit();
-        }, 1000)
+        processLoading()
     })
+    
+    $("input").keypress(function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            processLoading()
+        }
+    });
 });
