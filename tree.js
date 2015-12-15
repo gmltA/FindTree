@@ -58,8 +58,10 @@ function Tree() {
 
 Tree.prototype.updateState = function(state) {
     var nodes = Array.from(document.querySelectorAll("tree-item"));
+    nodes.forEach(function(element) {
+        element.disabled = true
+    })
     state.tree.forEach(function(element, index) {
-        //console.log(element.Position)
         var node = document.querySelector("#tree-item-" + (element.Position - 1))
         node.completed = element.isSolved == 1
             if (state.current == null) {
@@ -137,8 +139,11 @@ $(function() {
             setTimeout(function() {
                 treeController.redraw()
             }, 1000)
-            fetchTreeStatus()
             $(".tree-container, body").addClass("zoomed");
+        },
+        
+        contentLoaded: function() {
+            fetchTreeStatus()
         }
     });
 });

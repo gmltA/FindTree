@@ -5,9 +5,9 @@
 <dom-module id="tree-item">
     <template id="tree-item-template">
             <div class="tree-item-content">
-                <div class="header">1.1</div>
+                <div class="header">[[treeNode]]</div>
                 <article>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque consequat nisi, at tempus nulla suscipit ut. Etiam eu justo in purus cursus condimentum et sed dolor. Nullam et magna in nunc vulputate sagittis. Curabitur ultricies mauris sit amet posuere gravida. Mauris vitae erat varius, accumsan nisl a, aliquet massa. Proin ut tempus nisl. Integer gravida diam quis dictum fringilla. Maecenas dictum vehicula tortor. Nullam vehicula porttitor lorem in tempor. Proin varius ligula vitae massa maximus gravida. Aenean porta posuere sapien, vel placerat tellus elementum at. Vestibulum eget dolor at turpis feugiat hendrerit sodales eu tortor. Vestibulum pellentesque lectus non egestas interdum. Cras pulvinar urna sem, a egestas elit imperdiet at. Mauris ac sollicitudin lectus. Fusce maximus ultricies aliquam.
+                    Loading...
                 </article>
                 <div class="footer">
                     <div class="button close">Close</div>
@@ -47,7 +47,7 @@
             
             _disabledChanged: function(newValue, oldValue) {
                 this.toggleClass('disabled', newValue);
-                if (newValue === true) {
+                if (newValue == true) {
                     highlighted = false
                 }
             },
@@ -77,8 +77,11 @@
                     return
                 
                 var article = $(this).find("article");
+                var self = this;
                 $.post("/ajax/viewTask.php", { position: this.treeNode}).done(function( data ) {
                     article.html(JSON.parse(data).text)
+                    if (self.highlighted)
+                        self.fire('contentLoaded')
                 });
                     
                 var content = $(this).children(".tree-item");
