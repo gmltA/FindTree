@@ -100,7 +100,6 @@ tree-item.highlighted:hover {
     top: 0;
     left: 0;
     opacity: .4;
-    display: none;
     background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
 }
 
@@ -116,4 +115,29 @@ tree-item.highlighted:hover {
 
 body.zoomed {
     overflow-y:hidden;
+}
+
+@keyframes loader {
+    0% {
+        transform: scale(5);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.loader {
+    width: 100%;
+    height: 100%;
+    background: url("loader.png") no-repeat center center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    will-change: transform;
+    animation: loader 3s infinite;
 }

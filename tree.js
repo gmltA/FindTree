@@ -98,15 +98,21 @@ window.addEventListener('resize', function(){
     treeController.redraw()
 });
 
-function fetchTreeStatus() {
+function fetchTreeStatus(callback) {
     $.get("/ajax/getStatus.php", "", function(response){
         var treeState = JSON.parse(response);
         treeController.updateState(treeState);
+        if (typeof callback === "function") {
+            callback()
+        }
     });
 }
 
 window.addEventListener('WebComponentsReady', function(e) {
-    fetchTreeStatus()
+    fetchTreeStatus(function() {
+        $(".blackout").fadeOut()
+        $(".loader").fadeOut()
+    })
 });
 
 $(function() {
