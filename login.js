@@ -5,6 +5,28 @@ function processLoading() {
     }, 1000)
 }
 
+function randomNumber(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+}
+
+var phrases = ["Покажи, что у тебя есть", "Сплошные раритеты по доступным ценам", "Сессия близко!", "Пофиг, пересдашь!",
+                "На 4 курсе не отчисляют"]
+var currentPhrase = 0
+var index = 0
+
+function appendNextLetter() {
+    var phrase = phrases[currentPhrase];
+    if (phrase.length > index) {
+        var timeout = randomNumber(300, 1000);
+        setTimeout(function() {
+            appendNextLetter()
+        }, timeout)
+    }
+    var text = $(".headline").text()
+    var newText = text + phrase.charAt(index++)
+    $(".headline").text(newText)
+}
+
 $(function() {
     $(".inp").on({
         focus: function () {
@@ -25,4 +47,7 @@ $(function() {
             processLoading()
         }
     });
+    
+    currentPhrase = randomNumber(0, phrases.length - 1)
+    appendNextLetter()
 });
