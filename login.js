@@ -1,8 +1,7 @@
 function processLoading() {
-    $(".inp").attr("disabled", true)
     $(".button, .body-wrapper").addClass("loading");
     setTimeout(function() {
-        $("form").submit();
+         $("form").submit();
     }, 1000)
 }
 

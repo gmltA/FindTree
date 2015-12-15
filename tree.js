@@ -58,19 +58,19 @@ function Tree() {
 
 Tree.prototype.updateState = function(state) {
     var nodes = Array.from(document.querySelectorAll("tree-item"));
-    nodes.forEach(function(element, index) {
-        if (state.tree[index]) {
-            element.completed = state.tree[index].isSolved == 1
+    state.tree.forEach(function(element, index) {
+        //console.log(element.Position)
+        var node = document.querySelector("#tree-item-" + (element.Position - 1))
+        node.completed = element.isSolved == 1
             if (state.current == null) {
-                element.disabled = false;
-                if (state.tree[index].isSolved != 1) {
-                    element.highlighted = true
+                node.disabled = false;
+                if (element.isSolved != 1) {
+                    node.highlighted = true
                 }
             }
-            else if (state.current == state.tree[index].Id) {
-                element.disabled = false;
+            else if (state.current == element.Id) {
+                node.disabled = false;
             }
-        }
     })
 }
 

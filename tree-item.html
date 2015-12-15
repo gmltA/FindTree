@@ -1,5 +1,6 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="stylesheet" href="tree-item.css">
+<meta charset="UTF-8">
 
 <dom-module id="tree-item">
     <template id="tree-item-template">
@@ -57,6 +58,9 @@
             
             _completedChanged: function(newValue, oldValue) {
                 this.toggleClass('done', newValue);
+                if (newValue == true) {
+                    this.disabled = false
+                }
             },
             
             submitAnswer: function() {
